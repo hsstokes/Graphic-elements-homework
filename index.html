@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Graphic Elements · Homework</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --ink: #1a1a1a;
+  --paper: #f2ede8;
+  --teal: #0a7a7a;
+  --teal-light: #e0f0f0;
+  --pink: #ea37a3;
+  --pink-light: #fdf1f5;
+  --purple: #6c35c9;
+  --purple-light: #f3eeff;
+  --gold: #c87900;
+  --gold-light: #fff8e6;
+  --warm-mid: #d4cfc8;
+  --grid: #ddd8d2;
+  --concrete: #8a8a8a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -10%; left: 48%;
+  width: 4px; height: 120vh;
+  background: rgba(255,255,255,0.6);
+  transform: rotate(12deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 36px 28px 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.site-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 16px;
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+.header-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.site-header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+.site-header h1 em { color: var(--teal); font-style: italic; }
+.header-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  text-align: right;
+  color: var(--concrete);
+  line-height: 1.9;
+}
+
+.deadline-banner {
+  background: var(--ink);
+  color: white;
+  border-radius: 4px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.deadline-banner h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--pink);
+  margin-bottom: 3px;
+}
+.deadline-banner p {
+  font-size: 0.84rem;
+  margin: 0;
+  color: rgba(255,255,255,0.85);
+}
+
+.diagonal-rule {
+  height: 3px;
+  background: linear-gradient(90deg, var(--pink), var(--teal));
+  margin: 24px 0;
+  transform: skewX(-15deg);
+}
+
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 1.6rem 0 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+h2::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 22px;
+  background: var(--pink);
+  flex-shrink: 0;
+}
+h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin: 0.8rem 0 0.4rem;
+}
+
+p { margin-bottom: 0.8em; font-size: 0.86rem; line-height: 1.8; }
+ul { margin-left: 18px; margin-bottom: 0.6em; }
+li { font-size: 0.84rem; margin-bottom: 5px; line-height: 1.6; }
+a { color: var(--teal); font-weight: 600; }
+a:hover { color: var(--pink); }
+
+/* TECHNIQUE PREVIEW */
+.technique-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 12px 0;
+}
+@media (max-width: 520px) { .technique-grid { grid-template-columns: 1fr; } }
+.technique-card {
+  background: white;
+  border: 2px solid var(--warm-mid);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.technique-top {
+  background: var(--ink);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: white;
+}
+.technique-body { padding: 9px 11px; }
+.technique-body h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.technique-body p { font-size: 0.74rem; margin: 0; color: var(--concrete); line-height: 1.4; }
+
+/* TWO COL */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 10px 0;
+}
+@media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+.method-card { border-radius: 4px; padding: 14px; border: 2px solid; }
+.method-card.scan { background: var(--teal-light); border-color: var(--teal); }
+.method-card.photo { background: var(--pink-light); border-color: var(--pink); }
+.method-card h3 { margin-top: 0; margin-bottom: 8px; }
+.method-card.scan h3 { color: var(--teal); }
+.method-card.photo h3 { color: var(--pink); }
+.method-card ul { margin-left: 14px; margin-bottom: 0; }
+.method-card li { font-size: 0.8rem; margin-bottom: 4px; }
+
+.notice {
+  background: rgba(234,55,163,0.08);
+  border-left: 4px solid var(--pink);
+  padding: 9px 13px;
+  margin: 10px 0;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.82rem;
+}
+.notice strong { color: var(--pink); }
+
+.info-box {
+  border-left: 4px solid var(--teal);
+  background: var(--teal-light);
+  padding: 9px 13px;
+  border-radius: 0 4px 4px 0;
+  margin: 10px 0;
+  font-size: 0.84rem;
+}
+.info-box strong { color: var(--teal); }
+.info-box.gold { background: var(--gold-light); border-color: var(--gold); }
+.info-box.gold strong { color: var(--gold); }
+.info-box.purple { background: var(--purple-light); border-color: var(--purple); }
+.info-box.purple strong { color: var(--purple); }
+
+/* WHERE TO SAVE */
+.bring-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+.bring-item {
+  background: white;
+  border: 2px solid var(--warm-mid);
+  border-radius: 4px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bring-item .b-icon { font-size: 1.3rem; }
+.bring-item h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+}
+.bring-item p { font-size: 0.72rem; color: var(--concrete); margin: 0; line-height: 1.4; }
+
+/* NAMING */
+.filename-box {
+  background: white;
+  border: 2px solid var(--warm-mid);
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin: 10px 0;
+}
+.filename-box .lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.filename-box .example {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  background: var(--paper);
+  padding: 5px 9px;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+/* CHECKLIST */
+.checklist {
+  background: white;
+  border: 2px solid var(--gold);
+  border-radius: 4px;
+  padding: 18px;
+  margin: 24px 0;
+}
+.checklist h3 {
+  font-size: 0.76rem;
+  text-align: center;
+  border-bottom: 2px dashed var(--gold);
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+}
+.ci { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.chk {
+  width: 20px; height: 20px;
+  border: 2px solid var(--gold);
+  border-radius: 3px;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  margin-top: 2px;
+}
+.chk.checked { background: var(--gold-light); }
+.chk.checked::after {
+  content: '✓';
+  position: absolute;
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+  top: -1px; left: 2px;
+}
+.cl {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.5;
+}
+.cl-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--concrete);
+  display: block;
+  margin-top: 1px;
+  font-weight: 400;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0 10px;
+  border-top: 1px dashed var(--warm-mid);
+  margin-top: 40px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--concrete);
+  line-height: 2;
+}
+
+@media (max-width: 600px) {
+  .container { padding: 20px 14px 40px; }
+  .site-header { grid-template-columns: 1fr; }
+  .header-meta { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="site-header">
+    <div>
+      <div class="header-eyebrow">Digital Skills · Homework · Rotation Session</div>
+      <h1>Bring Your Work<br><em>to the Session</em></h1>
+    </div>
+    <div class="header-meta">
+      Do this<br>↓<br>before you arrive
+    </div>
+  </header>
+
+  <div class="deadline-banner">
+    <div style="font-size:1.6rem;flex-shrink:0;">📅</div>
+    <div>
+      <h3>Complete before the lesson</h3>
+      <p>Scan or photograph <strong>2–4 Design sketchbook pages</strong> and have them saved ready to open in Photoshop.</p>
+    </div>
+  </div>
+
+  <!-- WHAT HAPPENS -->
+  <h2>What You Will Do in the Session</h2>
+  <p>You will add graphic marks to your own research pages in Photoshop. <strong>No scans = no outcome.</strong></p>
+
+  <div class="technique-grid">
+    <div class="technique-card">
+      <div class="technique-top">〰</div>
+      <div class="technique-body">
+        <h4>Type on Path</h4>
+        <p>Characters placed along a curved path</p>
+      </div>
+    </div>
+    <div class="technique-card">
+      <div class="technique-top">⌨</div>
+      <div class="technique-body">
+        <h4>Keyboard Marks</h4>
+        <p>Slashes, tildes, asterisks as visual texture</p>
+      </div>
+    </div>
+    <div class="technique-card">
+      <div class="technique-top">✦</div>
+      <div class="technique-body">
+        <h4>Symbol Brushes</h4>
+        <p>A character turned into a Photoshop brush</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>Which pages to bring:</strong> research spreads with images and annotations work best. Choose pages with a clear visual theme — the marks you create should respond to your concept.
+  </div>
+
+  <div class="diagonal-rule"></div>
+
+  <!-- HOW TO CAPTURE -->
+  <h2>Scan or Photograph Your Pages</h2>
+
+  <div class="two-col">
+    <div class="method-card scan">
+      <h3>🖨️ Scan at College</h3>
+      <ul>
+        <li>Page flat on the scanner glass</li>
+        <li>Swipe card → <strong>Scan to Email</strong></li>
+        <li>Resolution: <strong>300 dpi</strong></li>
+        <li>Download from your inbox</li>
+      </ul>
+    </div>
+    <div class="method-card photo">
+      <h3>📸 Photograph</h3>
+      <ul>
+        <li>Soft daylight — no direct sun</li>
+        <li>Phone directly above, not at an angle</li>
+        <li>Take several, pick the sharpest</li>
+        <li>Check it's in focus before moving on</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="notice"><strong>Best results:</strong> scan for clarity, photograph for texture.</div>
+
+  <div class="diagonal-rule"></div>
+
+  <!-- SAVE AND NAME -->
+  <h2>Save Your Files</h2>
+
+  <div class="filename-box">
+    <div class="lbl">Save as JPEG · name clearly</div>
+    <div class="example">design_research_page1.jpg</div>
+    <div class="example">design_research_page2.jpg</div>
+  </div>
+
+  <div class="info-box gold">
+    <strong>iPhone users:</strong> Settings → Camera → Formats → <strong>Most Compatible</strong> to save as JPEG not HEIC.
+  </div>
+
+  <div class="bring-grid">
+    <div class="bring-item">
+      <div class="b-icon">☁️</div>
+      <h4>Google Drive</h4>
+      <p>Access on any college computer</p>
+    </div>
+    <div class="bring-item">
+      <div class="b-icon">💾</div>
+      <h4>USB Drive</h4>
+      <p>Most reliable in college</p>
+    </div>
+    <div class="bring-item">
+      <div class="b-icon">📧</div>
+      <h4>Email Yourself</h4>
+      <p>UAL email, download on arrival</p>
+    </div>
+    <div class="bring-item">
+      <div class="b-icon">💻</div>
+      <h4>Your Laptop</h4>
+      <p>Files in one folder, ready to open</p>
+    </div>
+  </div>
+
+  <div class="notice"><strong>Save to two places</strong> — don't rely on one location.</div>
+
+  <div class="diagonal-rule"></div>
+
+  <!-- REFERENCING -->
+  <h2>Harvard Referencing</h2>
+  <p>Any image you found (not made yourself) must be credited on the page. Check this before you arrive.</p>
+
+  <div class="info-box purple">
+    <strong>Format:</strong> Surname, I. (Year) <em>Title</em>. Site. Available at: URL (Accessed: DD Month YYYY).
+  </div>
+  <p>Guide: <a href="https://hsstokes.github.io/Harvard-Referencing-Guide/" target="_blank">hsstokes.github.io/Harvard-Referencing-Guide</a></p>
+
+  <div class="diagonal-rule"></div>
+
+  <!-- CHECKLIST -->
+  <div class="checklist">
+    <h3>✓ Ready for the Session</h3>
+
+    <div class="ci">
+      <div class="chk" onclick="tog(this)"></div>
+      <span class="cl">2–4 Design pages scanned or photographed
+        <span class="cl-sub">Research spreads with images and annotations</span>
+      </span>
+    </div>
+
+    <div class="ci">
+      <div class="chk" onclick="tog(this)"></div>
+      <span class="cl">Images are sharp and well-lit
+        <span class="cl-sub">Retake any that are blurry or dark</span>
+      </span>
+    </div>
+
+    <div class="ci">
+      <div class="chk" onclick="tog(this)"></div>
+      <span class="cl">Files saved as JPEG and named clearly
+        <span class="cl-sub">Not HEIC — convert if needed</span>
+      </span>
+    </div>
+
+    <div class="ci">
+      <div class="chk" onclick="tog(this)"></div>
+      <span class="cl">Saved to at least two locations</span>
+    </div>
+
+    <div class="ci">
+      <div class="chk" onclick="tog(this)"></div>
+      <span class="cl">Secondary images are Harvard referenced
+        <span class="cl-sub">Any image you didn't make yourself</span>
+      </span>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2025 Digital Skills · Creating Graphic Elements · Rotation Session<br>
+  Questions? Contact your tutor before the session.
+</footer>
+
+<script>
+function tog(el) { el.classList.toggle('checked'); }
+</script>
+</body>
+</html>
